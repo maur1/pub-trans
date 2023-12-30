@@ -49,14 +49,8 @@ def configure_connector():
        }),
     )
 
-    ## Ensure a healthy response was given
-    try:
-        resp.raise_for_status()
-    except:
-        print(f"failed creating connector: {json.dumps(resp.json(), indent=2)}")
-        exit(1)
-
-    print("connector created successfully")
+    resp.raise_for_status()
+    logger.debug("connector created successfully")
     return
 
 if __name__ == "__main__":
