@@ -29,13 +29,14 @@ class Turnstile(Producer):
         )
 
         super().__init__(
-            f"station.turnstile.entering.{station_name}",
+            "turnstile",
             key_schema=Turnstile.key_schema,
             value_schema=Turnstile.value_schema,
             num_partitions=1,
             num_replicas=1,
         )
         self.station = station
+        self.station.name = station_name
         self.turnstile_hardware = TurnstileHardware(station)
 
     def run(self, timestamp, time_step):
